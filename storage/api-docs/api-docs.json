@@ -1,0 +1,281 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "EIVIS API",
+        "description": "REST API dokumentācija EIVIS sistēmai",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/frontend-articles": {
+            "get": {
+                "tags": [
+                    "FrontendArticle"
+                ],
+                "summary": "Saņem visus rakstus",
+                "operationId": "fdf838d1aac30103caee1ef5a6e52bbc",
+                "responses": {
+                    "200": {
+                        "description": "Veiksmīgi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FrontendArticle"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/frontend-articles/{slug}": {
+            "get": {
+                "tags": [
+                    "FrontendArticle"
+                ],
+                "summary": "Saņem vienu rakstu pēc ID",
+                "operationId": "89db95a1df3008db3f095d98a655671f",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Veiksmīgi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FrontendArticle"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Nav atrasts"
+                    }
+                }
+            }
+        },
+        "/api/frontend-pages": {
+            "get": {
+                "tags": [
+                    "FrontendPages"
+                ],
+                "summary": "Saņem visas frontend lapas",
+                "operationId": "900032f152696040867b8a74cd9edf97",
+                "responses": {
+                    "200": {
+                        "description": "Veiksmīgi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FrontendPage"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/frontend-pages/{id}": {
+            "get": {
+                "tags": [
+                    "FrontendPages"
+                ],
+                "summary": "Saņem konkrētu frontend lapu",
+                "operationId": "6b4632beff04cc9fae73e53b4b6316a9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Veiksmīgi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FrontendPage"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Lapa nav atrasta"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FrontendArticleList": {
+                "title": "FrontendArticle",
+                "required": [
+                    "id",
+                    "title"
+                ],
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "introduction": {
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
+            "FrontendArticle": {
+                "title": "FrontendArticle",
+                "required": [
+                    "id",
+                    "title"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Ziņa par API"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "Ziņa par API"
+                    },
+                    "published_from": {
+                        "type": "string",
+                        "example": "01.01.2024"
+                    },
+                    "published_to": {
+                        "type": "string",
+                        "example": "31.12.2024"
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "video": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "tag": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "banners": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "content": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "FrontendPage": {
+                "title": "FrontendPage",
+                "required": [
+                    "id",
+                    "title",
+                    "slug"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Sākumlapa"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "sakumlapa"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "articles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FrontendArticle"
+                        }
+                    },
+                    "childs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FrontendPage"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "FrontendArticle",
+            "description": "FrontendArticle"
+        },
+        {
+            "name": "FrontendPages",
+            "description": "FrontendPages"
+        }
+    ]
+}
